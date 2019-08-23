@@ -25,7 +25,8 @@ class NewWindow extends React.PureComponent {
     onOpen: null,
     onUnload: null,
     center: 'parent',
-    copyStyles: true
+    copyStyles: true,
+    closeWithParent: true,
   }
 
   /**
@@ -138,7 +139,8 @@ class NewWindow extends React.PureComponent {
    * Close the opened window (if any) when NewWindow will unmount.
    */
   componentWillUnmount() {
-    if (this.window) {
+    const { closeWithParent } = this.props
+    if (this.window && closeWithParent) {
       this.window.close()
     }
   }
@@ -175,7 +177,8 @@ NewWindow.propTypes = {
   onBlock: PropTypes.func,
   onOpen: PropTypes.func,
   center: PropTypes.oneOf(['parent', 'screen']),
-  copyStyles: PropTypes.bool
+  copyStyles: PropTypes.bool,
+  closeWithParent: PropTypes.bool,
 }
 
 /**
